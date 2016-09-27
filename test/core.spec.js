@@ -28,6 +28,7 @@ describe('appication logic', () => {
       }));
     });
   });
+  
   describe('next', () => {
     it('takes next two entries under vote', () => {
       const state = Map({
@@ -41,6 +42,7 @@ describe('appication logic', () => {
         entries: List.of('Sunshine')
       }));
     });
+    
     it('puts winner of a current vote at the back of the entires list', () => {
       const state = Map({
         vote: Map({
@@ -61,6 +63,7 @@ describe('appication logic', () => {
         entries: List.of('127 Hours', 'Trainspotting')
       }));
     });
+    
     it('puts back both entries at the end of list if voting tied', () => {
       const state = Map({
         vote: Map({
@@ -81,7 +84,27 @@ describe('appication logic', () => {
         entries: List.of('127 Hours', 'Trainspotting', '28 Days Later')
       }));
     });
+    
+    it('marks winner when vote ends', () => {
+      const state = Map({
+        vote: Map({
+          pair: List.of('Trainspotting', '28 Days Later'),
+          tally: Map({
+            'Trainspotting': 4,
+            '28 Days Later': 2
+          })
+        }),
+        entries: List()
+      });
+      
+      const nextState = next(state);
+      
+      expect(nextState).to.equal(Map({
+        winner: 'Trainspotting'
+      }));
+    });
   });
+  
   describe('vote', () => {
     it('creates a tally for new vote entry', () => {
       const state = Map({
