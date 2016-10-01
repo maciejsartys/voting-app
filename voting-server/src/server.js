@@ -1,7 +1,7 @@
 import Server from 'socket.io';
 
 export default function startServer(store) {
-  const port = process.env.PORT;
+  const port = 8090;
   const io = new Server().attach(port);
   
   store.subscribe(
