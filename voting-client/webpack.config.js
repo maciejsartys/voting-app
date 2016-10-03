@@ -1,17 +1,16 @@
 var webpack = require('webpack');
 
-
 module.exports = {
   entry: [
-    './src/index.js',
-    'webpack-dev-server/client?http://0.0.0.0:8080',
+    './src/index.jsx',
+    'webpack-dev-server/client?http://0.0.0.0',
     'webpack/hot/only-dev-server',
   ],
   module: {
     loaders: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      loader: 'react-hot!babel'
+      loaders: ['react-hot-loader/webpack', 'babel'],
     }]
   },
   resolve: {
